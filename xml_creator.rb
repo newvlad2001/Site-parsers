@@ -9,7 +9,7 @@ class XmlCreator
     @jobs_count_xml = Ox::Element.new('jobs_count')
     @jobs_xml = Ox::Element.new('jobs')
     source_xml = Ox::Element.new('source')
-    time_xml = Ox::Element.new('generation_time') << Time.now.strftime('%Y-%m-%d %H:%M:%S')
+    time_xml = Ox::Element.new('generation_time') << Time.now.strftime('%Y-%m-%d %H:%M:%S %z')
 
     source_xml << @jobs_count_xml << time_xml << @jobs_xml
     @doc_xml << source_xml
