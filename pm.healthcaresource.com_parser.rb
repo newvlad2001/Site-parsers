@@ -45,9 +45,9 @@ data['hits']['hits'].each do |job|
   params[:job_reference] = job['userArea']['jobPostingID'].to_s
   location = job['jobLocation']['address']
   params[:location] = "#{location['streetAddress']}, #{location['addressLocalityRegion']}"
-  params[:city] = job['jobLocation']['address']['addressLocality']
-  params[:state] = job['jobLocation']['address']['addressRegion']
-  params[:zip_code] = job['jobLocation']['address']['postalCode']
+  params[:city] = location['addressLocality']
+  params[:state] = location['addressRegion']
+  params[:zip_code] = location['postalCode']
   params[:req_number] = job['userArea']['requisitionNumber']
   params[:posted_at] = job['datePosted']
   params[:company] = job['hiringOrganization']['subOrganization']['name']

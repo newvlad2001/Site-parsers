@@ -7,7 +7,7 @@ agent = Mechanize.new
 creator = XmlCreator.new
 page = agent.get('http://jobs.pmz.com/mcc/pmz/listingpage.htm')
 
-links = page.links_with(class: 'btn-view')[0...5]
+links = page.links_with(class: 'btn-view')
 links.each do |link|
   job_page = link.click
   job_descr = job_page.search('div.six.columns > p')
