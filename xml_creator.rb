@@ -2,6 +2,12 @@
 
 require 'ox'
 
+# Class for creating XML of the following format:
+#   <jobs>
+#     <job>
+#       <job_parameter1>
+#       <job_parameter2>
+#       ...
 class XmlCreator
   def initialize
     @jobs_counter = 0
@@ -16,6 +22,20 @@ class XmlCreator
     @doc_xml << source_xml
   end
 
+  # Creates a job with the specified parameters
+  # @param params [Hash] Job parameters
+  # @option params [String] :title ('') Job title
+  # @option params [String] :url ('') Page url with full job description
+  # @option params [String] :job_reference ('') Job reference
+  # @option params [String] :location ('') Job location
+  # @option params [String] :city ('') Job location city
+  # @option params [String] :state ('') Job location state
+  # @option params [String] :country ('') Job location country
+  # @option params [String] :zip_code ('') Job location zip code
+  # @option params [String] :req_number ('') Job requisition number
+  # @option params [String] :posted_at ('') Job posting date
+  # @option params [String] :company ('') Hiring organization
+  # @option params [String] :body ('') Job full description text
   def add_job(params)
     job_xml = Ox::Element.new('job')
     title_xml = Ox::Element.new('title') << params[:title]
@@ -37,6 +57,11 @@ class XmlCreator
     @jobs_counter += 1
   end
 
+  # Saves XML to the file
+  # @param filepath [String] File path to write the XML document to
+  # @param options [Hash] Formatting options
+  # @option options [Fixnum] :indent Format expected
+  # @see Ox.to_file
   def save_result(filepath, options)
     @doc_xml.source.jobs_count << @jobs_counter.to_s
     Ox.to_file(filepath, @doc_xml, options)
