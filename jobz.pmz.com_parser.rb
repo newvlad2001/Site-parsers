@@ -23,7 +23,7 @@ links.each do |link|
   params[:state] = state_zip[0]
   params[:zip_code] = state_zip[1]
   params[:company] = job_descr[1].text
-  params[:body] = job_page.search('div.row.top-margin.desc').to_s.delete("\r\n")
+  params[:body] = job_page.at('div.row.top-margin.desc').to_s.delete("\r\n")
 
   creator.add_job(params)
 end
