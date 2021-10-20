@@ -36,6 +36,7 @@ class XmlCreator
   # @option params [String] :posted_at ('') Job posting date
   # @option params [String] :company ('') Hiring organization
   # @option params [String] :body ('') Job full description text
+  # @return [Integer] Current amount of jobs
   def add_job(params)
     job_xml = Ox::Element.new('job')
     title_xml = Ox::Element.new('title') << params[:title]
@@ -61,7 +62,7 @@ class XmlCreator
   # @param filepath [String] File path to write the XML document to
   # @param options [Hash] Formatting options
   # @option options [Fixnum] :indent Format expected
-  # @see Ox.to_file
+  # @see Ox for more information about options
   def save_result(filepath, options)
     @doc_xml.source.jobs_count << @jobs_counter.to_s
     Ox.to_file(filepath, @doc_xml, options)

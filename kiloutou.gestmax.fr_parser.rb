@@ -14,7 +14,7 @@ loop do
     job_page_link = page.link_with(href: job.attr('href'))
     job_page = job_page_link.click
 
-    params[:title] = job.at('h3.list-group-item-heading').text.strip
+    params[:title] = job.at('h3.list-group-item-heading/text()').text.strip
     params[:url] = job_page_link.href
     params[:job_reference] = job_page_link.href['https://kiloutou.gestmax.fr/'.length...job_page_link.href.length]
     params[:location] = job.at('span.listdiv-span.listspan-vac_lieu_geographique').text.strip
